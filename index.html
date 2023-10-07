@@ -606,59 +606,81 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         </div> -->
     <!-- </section> -->
-    <section class="md:p-40 my-10 relative ">
-        <h1
-            class=" sm:text-6xl  flex items-center text-[var(--green)] justify-center font-bold text-center text-6xl ">
+    <section class="md:p-40 my-10 relative">
+        <h1 class="sm:text-6xl flex items-center text-[var(--green)] justify-center font-bold text-center text-6xl">
             Contact Us
         </h1>
-        <form method="post" action="./index.php"  class="md:p-24 flex flex-col gap-9 my-4 md:mx-auto ">
+        <form id="myForm" class="md:p-24 flex flex-col gap-9 my-4 md:mx-auto">
 
-            <div class="flex flex-col px-10  my-2  ">
-                <label >Name</label>
-                <input  required type="text" class=" rounded-md p-2 border-2" id="fname" name="firstname"
-                    placeholder="Your name..">
+            <div class="flex flex-col px-10 my-2">
+                <label for="fname">Name</label>
+                <input required type="text" class="rounded-md p-2 border-2" id="fname" name="firstname" placeholder="Your name..">
             </div>
 
             <div class="flex flex-col px-10 my-2">
-                <label >Email</label>
-                <input required class="rounded-md p-2 border-2" type="text" req name="email" placeholder="abc@example.com">
-
+                <label for="email">Email</label>
+                <input required class="rounded-md p-2 border-2" type="email" name="email" placeholder="abc@example.com">
             </div>
-            <div class="flex flex-col px-10 my-2">
-                <label >
-                    Address
-                </label>
 
+             <div class="flex flex-col px-10 my-2">
+                <label for="subject">Subject</label>
+                <input required type="text" class="rounded-md p-2 border-2" id="subject" name="subject" placeholder="Message subject...">
+            </div>
+
+            <div class="flex flex-col px-10 my-2">
+                <label for="address">Address</label>
                 <select required id="address" name="address" class="rounded-md p-2 border-2">
                     <option value="India">India</option>
-                    <option value="canada">Canada</option>
-                    <option value="usa">USA</option>
+                    <option value="Canada">Canada</option>
+                    <option value="USA">USA</option>
                 </select>
             </div>
+  
 
             <div width="">
                 <div class="flex flex-col px-10 my-2">
-                    <label >Message</label>
-                    <textarea required id="subject" name="message" placeholder="Write something.."
-                        class="rounded-md p-2 border-2" style="height:200px"></textarea>
+                    <label for="subject">Message</label>
+                    <textarea required id="subject" name="message" placeholder="Write something.." class="rounded-md p-2 border-2" style="height:200px"></textarea>
                 </div>
             </div>
 
-            <div class="my-6 ">
-                <input type="submit" name="submit" value="submit" class="rounded-lg mx-auto flex bg-[var(--green)] p-4"></input>
-                
-                <p class = "my-10 mx-auto text-xl font-bold text-center ">
-                    <?php
-                       echo( $msg." ");
-                    ?>
+            <div class="my-6">
+                <input type="submit" name="submit" value="Submit" class="rounded-lg mx-auto flex bg-[var(--green)] p-4">
+                <p id="success-message" class="my-10 mx-auto text-xl font-bold text-center" style="display: none;">
+                    Message sent successfully!
                 </p>
             </div>
         </form>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+        <script type="text/javascript">
+            (function () {
+                emailjs.init("1EkpRoro7rv3gkRQC"); // Replace with your EmailJS user ID
+            })();
+        </script>
+        <script>
+            document
+                .getElementById("myForm")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault();
 
+                    const serviceID = "service_96hse6k"; // Replace with your EmailJS service ID
+                    const templateID = "template_m0xzgmt"; // Replace with your EmailJS template ID
 
-      
-
+                    emailjs.sendForm(serviceID, templateID, this).then(
+                        (response) => {
+                            console.log("SUCCESS!", response.status, response.text);
+                            document.getElementById("success-message").style.display = "block";
+                            this.reset(); // Clear form fields
+                        },
+                        (error) => {
+                            console.log("FAILED...", error);
+                            alert("Failed to send the message. Please try again later.");
+                        }
+                    );
+                });
+        </script>
     </section>
+
     <footer class="relative w-full z-10 bg-[var(--green)] pt-10 text-[var(--white)]  pb-10  lg:pb-20" id="CONTACT">
         <div class="mx-auto px-4  flex justify-center items-center ">
             <div class="-mx-4 flex flex-wrap justify-center align-middle">
