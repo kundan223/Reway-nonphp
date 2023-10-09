@@ -283,3 +283,21 @@ div.nchild:nth-child(n) {
 
 }
 
+/* for page 3 */
+.text_3{
+    color: green;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* for footer */
+
+.f1{
+    font-weight: bold;
+    color: rgb(113, 146, 8);
+}
+
+.f1:hover{
+    color: #199e53;
+    font-weight: bold;
+}
